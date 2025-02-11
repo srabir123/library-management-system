@@ -22,3 +22,26 @@ MainWindow::MainWindow(QWidget *parent)
     ui->EnterBooknameButton_2->setVisible(false);
     ui->selfnumberanshelfbutton_2->setVisible(false);
 
+// Load book data from the file
+void MainWindow::loadBooks()
+{
+    QFile file("books.txt");
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "No books file found. Starting fresh.";
+        return;
+    }
+
+    QTextStream in(&file);
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+        QStringList parts = line.split(", Shelf: ");
+        if (parts.size() == 2) {
+            QString bookName = parts[0].remove("Book: ").trimmed();
+            QString shelfDetails = parts[1].trimmed();
+            bookShelfMap.insert(bookName, shelfDetails);
+        }
+    }
+    file.close();
+
+    qDebug() << "Loaded books from file:" << bookShelfMap;
+}
