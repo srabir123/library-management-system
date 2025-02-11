@@ -21,6 +21,18 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pipilikaIdLineEdit_2->setVisible(false);
     ui->EnterBooknameButton_2->setVisible(false);
     ui->selfnumberanshelfbutton_2->setVisible(false);
+ // Load registered roll numbers and books
+    loadRegisteredRolls();
+    loadBooks(); // New addition
+
+    // Connect buttons to their slots
+    connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::button1);
+    connect(ui->pushButton_2, &QPushButton::clicked, this, &MainWindow::close);
+    connect(ui->registerButton, &QPushButton::clicked, this, &MainWindow::onRegisterButtonClicked);
+    connect(ui->confirmButton, &QPushButton::clicked, this, &MainWindow::onConfirmButtonClicked);
+    connect(ui->AddBookButton, &QPushButton::clicked, this, &MainWindow::on_AddBookButton_clicked);
+    connect(ui->ADDButton, &QPushButton::clicked, this, &MainWindow::on_ADDButton_clicked);
+}
 
 // Load book data from the file
 void MainWindow::loadBooks()
