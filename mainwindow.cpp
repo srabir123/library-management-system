@@ -3,7 +3,7 @@
 #include <QMessageBox>
 #include <QFile>
 #include <QTextStream>
-#include <QDebug> // For debugging output
+#include <QDebug> 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
